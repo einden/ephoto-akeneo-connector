@@ -1,5 +1,5 @@
 {
-  "name": "einden/akeneo-connector-ephoto",
+  "name": "ephoto/akeneo-connector",
   "type": "symfony-bundle",
   "description": "Extension to connect ePhoto to Akeneo",
   "keywords": [
@@ -10,7 +10,7 @@
     "ephoto"
   ],
   "homepage": "http://www.ephoto.fr",
-  "license": "OSL-3.0",
+  "license": "proprietary",
   "authors": [
     {
       "name": "Einden",
@@ -34,8 +34,8 @@
   "config": {
   },
   "autoload": {
-    "psr-0": {
-	  "Einden\\Ephoto\\ConnectorBundle\\": ""
+    "psr-4": {
+	  "Einden\\Ephoto\\ConnectorBundle\\": "Einden/Ephoto/ConnectorBundle/",
     }
   }
 }
