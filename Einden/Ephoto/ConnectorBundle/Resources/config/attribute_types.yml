@@ -1,0 +1,24 @@
+parameters:
+    pim_datagrid.product.attribute_type.einden_catalog_tessa:
+        column:
+            type:        product_value_ephoto
+            selector:    product_value_base
+            frontend_type: html
+        filter:
+            type:        product_value_ephoto
+            ftype:       boolean
+            options:
+                field_options:
+                    attr:
+                        empty_choice: true
+        sorter:          ~
+
+services:
+    einden.ephoto.catalog.attributetype.ephoto:
+      class: Einden\Ephoto\ConnectorBundle\AttributeType\EphotoType
+      arguments:
+          - varchar
+          - text
+          - '@pim_catalog.validator.constraint_guesser.chained_attribute'
+      tags:
+          - { name: pim_catalog.attribute_type, alias: einden_catalog_ephoto, entity: '%pim_catalog.entity.product.class%' }

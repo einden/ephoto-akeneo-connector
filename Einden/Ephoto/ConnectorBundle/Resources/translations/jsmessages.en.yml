@@ -1,0 +1,8 @@
+ephoto:
+  configuration:
+    base_url:
+      label: URL du serveur
+    tab:
+      label: ePhoto
+    link:
+      label: Extension ePhoto pour Akeneo

@@ -1,0 +1,5 @@
+pim_einden_ephoto_connector:
+    settings:
+        base_url:
+            value: ~
+            scope: app
