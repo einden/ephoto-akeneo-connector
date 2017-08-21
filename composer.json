@@ -18,14 +18,15 @@
         "php": ">=5.6",
         "akeneo/pim-community-dev": ">=1.7"
     },
-    "require-dev": {
-        "php": ">=5.6",
-        "akeneo/pim-community-dev": ">=1.7"
-    },
     "config": {},
     "autoload": {
         "psr-4": {
             "Einden\\Ephoto\\ConnectorBundle\\": "Einden/Ephoto/ConnectorBundle/"
         }
+    },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
     }
+  },	
 }
