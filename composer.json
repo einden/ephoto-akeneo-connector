@@ -23,10 +23,6 @@
         "psr-4": {
             "Einden\\Ephoto\\ConnectorBundle\\": "Einden/Ephoto/ConnectorBundle/"
         }
-    },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.1-dev"
     }
-  },	
+  }	
 }
