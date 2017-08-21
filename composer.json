@@ -1,42 +1,28 @@
 {
-  "name": "ephoto/akeneo-connector",
-  "type": "symfony-bundle",
-  "description": "Extension to connect ePhoto to Akeneo",
-  "keywords": [
-    "pim",
-    "akeneo",
-    "dam",
-    "einden",
-    "ephoto"
-  ],
-  "homepage": "http://www.ephoto.fr",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Einden",
-      "homepage": "http://www.einden.com"
+    "name": "ephoto/akeneo-connector",
+    "type": "symfony-bundle",
+    "description": "Extension to connect ePhoto to Akeneo",
+    "keywords": ["pim", "akeneo", "dam", "einden", "ephoto"],
+    "homepage": "http://www.ephoto.fr",
+    "license": "proprietary",
+    "authors": [{
+        "name": "Einden",
+        "homepage": "http://www.einden.com"
+    }],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/akeneo/pim-community-dev.git",
+        "branch": "master"
+    }],
+    "require": {
+        "phpspec/phpspec": "2.1.*",
+        "php": ">=5.6",
+        "akeneo/pim-community-dev": ">=1.7"
+    },
+    "config": {},
+    "autoload": {
+        "psr-4": {
+            "Einden\\Ephoto\\ConnectorBundle\\": "Einden/Ephoto/ConnectorBundle/"
+        }
     }
-  ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/akeneo/pim-community-dev.git",
-      "branch": "master"
-    }
-  ],
-  "require": {
-    "phpspec/phpspec": "2.1.*",
-	"php": ">=5.6",
-	"akeneo/pim-community-dev": ">=1.7"
-  },
-  "require-dev": {
-    "phpspec/phpspec": "2.4.*",
-  },
-  "config": {
-  },
-  "autoload": {
-    "psr-4": {
-	  "Einden\\Ephoto\\ConnectorBundle\\": "Einden/Ephoto/ConnectorBundle/",
-    }
-  }
 }
