@@ -9,7 +9,7 @@ namespace Einden\Ephoto\ConnectorBundle\AttributeType;
 use Pim\Bundle\CatalogBundle\AttributeType\AbstractAttributeType;
 use Pim\Component\Catalog\Model\AttributeInterface;
 
-class TessaType extends AbstractAttributeType
+class EphotoType extends AbstractAttributeType
 {
 	public function getName()
 	{

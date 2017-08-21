@@ -27,8 +27,8 @@ define([
 
             render: function () {
                 this.$el.html(this.template({
-                    base_url: this.getFormData()['pim_eikona_tessa_connector___base_url'] ?
-                        this.getFormData()['pim_eikona_tessa_connector___base_url'].value : '',
+                    base_url: this.getFormData()['pim_einden_ephoto_connector___base_url'] ?
+                        this.getFormData()['pim_einden_ephoto_connector___base_url'].value : '',
                 }));
 
 

@@ -1,8 +1,8 @@
 services:
-    pim_catalog.updater.setter.einden_catalog_tessa:
+    pim_catalog.updater.setter.einden_catalog_ephoto:
         class: Einden\Ephoto\ConnectorBundle\Updater\EphotoAttributeSetter
         parent: pim_catalog.updater.setter.abstract
         arguments:
-            - ['einden_catalog_tessa']
+            - ['einden_catalog_ephoto']
         tags:
             - { name: 'pim_catalog.updater.setter' }

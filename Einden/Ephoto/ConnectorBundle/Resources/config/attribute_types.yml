@@ -1,5 +1,5 @@
 parameters:
-    pim_datagrid.product.attribute_type.einden_catalog_tessa:
+    pim_datagrid.product.attribute_type.einden_catalog_ephoto:
         column:
             type:        product_value_ephoto
             selector:    product_value_base
