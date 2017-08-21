@@ -20,7 +20,7 @@ You can install this bundle with composer (see requirements section):
 
 Then add the following lines **at the end** of your app/config/routing.yml :
 ```yaml
-einden_ephoto:
+ephoto:
     resource: "@EindenEphotoConnectorBundle/Resources/config/routing.yml"
 ```
 
