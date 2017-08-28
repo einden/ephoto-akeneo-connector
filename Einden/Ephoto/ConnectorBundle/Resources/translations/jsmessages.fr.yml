@@ -4,5 +4,6 @@ ephoto:
       label: URL du serveur
     tab:
       label: ePhoto
-    link:
-      label: Extension ePhoto pour Akeneo
+    copyright:
+      label: © 2017 Einden. Tous droits réservés.
+      url: https://www.ephoto.fr

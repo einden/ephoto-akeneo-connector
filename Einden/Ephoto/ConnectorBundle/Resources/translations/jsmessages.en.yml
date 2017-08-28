@@ -4,5 +4,6 @@ ephoto:
       label: URL du serveur
     tab:
       label: ePhoto
-    link:
-      label: Extension ePhoto pour Akeneo
+    copyright:
+      label: © 2017 Einden. All right reserved.
+      url: https://www.ephoto-dam.com

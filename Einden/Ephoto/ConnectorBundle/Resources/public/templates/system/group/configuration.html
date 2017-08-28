@@ -1,10 +1,11 @@
 <!--
  This file is part of the Ephoto Connector Bundle package.
 -->
+<!--
 <h3>
-    <img style="height: 80px; margin-bottom: 1em;" src="/bundles/eindenephotoconnector/images/logo.png"/>
-    <p><a href="http://www.ephoto.fr/" target="_blank"><%- _.__('ephoto.configuration.link.label') %></a></p>
+	<p><%- _.__('ephoto.configuration.title.label') %></p>
 </h3>
+-->
 <div class="AknFieldContainer">
     <div class="AknFieldContainer-header">
         <label class="AknFieldContainer-label control-label AknFieldContainer-label required" for="pim_einden_ephoto_connector___base_url"><%- _.__('ephoto.configuration.base_url.label') %></label>
@@ -12,4 +13,9 @@
     <div class="AknFieldContainer-inputContainer field-input">
         <input class="ephoto-config  AknTextField" id="pim_einden_ephoto_connector___base_url" name="pim_einden_ephoto_connector___base_url" type="text" value="<%- base_url %>"/>
     </div>
+</div>
+
+<div style="margin-top:50px;font-size:12px">
+    <a href="<%- _.__('ephoto.configuration.copyright.url') %>" target="_blank"><img src="/bundles/eindenephotoconnector/images/logo.png"></a>
+	<p><%- _.__('ephoto.configuration.copyright.label') %></p>
 </div>
