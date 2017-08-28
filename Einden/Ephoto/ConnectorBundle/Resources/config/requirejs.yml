@@ -2,6 +2,7 @@ config:
     paths:
         einden/ephoto/connector/einden-mam-field:                   eindenephotoconnector/js/product/field/mam-field
         einden/ephoto/connector/templates/product/field/mam:        eindenephotoconnector/templates/product/field/mam.html
+        einden/ephoto/connector/mam-asset-selection-form:           eindenephotoconnector/js/mam-asset-selection/form
         einden/ephoto/connector/system/configuration:               eindenephotoconnector/js/form/system
         einden/ephoto/connector/templates/system/group/configuration: eindenephotoconnector/templates/system/group/configuration.html
         einden/ephoto/connector/attributes/product-info:            eindenephotoconnector/js/product/form/attributes/product-info

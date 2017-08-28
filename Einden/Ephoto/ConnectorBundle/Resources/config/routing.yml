@@ -1,2 +1,4 @@
 ephoto:
-# Vide pour l'instant
+einden_rest:
+    resource: 'Routing/rest.yml'
+    prefix: /api/rest/ephoto
