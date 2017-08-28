@@ -2,6 +2,7 @@ ephoto:
   configuration:
     base_url:
       label: URL du serveur
+      placeholder : https://ephoto.mycompagny.com/
     tab:
       label: ePhoto
     copyright:
