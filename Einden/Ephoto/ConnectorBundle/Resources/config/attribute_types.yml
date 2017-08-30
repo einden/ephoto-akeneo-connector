@@ -1,17 +1,17 @@
 parameters:
-    pim_datagrid.product.attribute_type.einden_catalog_ephoto:
-        column:
-            type:        product_value_ephoto
-            selector:    product_value_base
-            frontend_type: html
-        filter:
-            type:        product_value_ephoto
-            ftype:       boolean
-            options:
-                field_options:
-                    attr:
-                        empty_choice: true
-        sorter:          ~
+#    pim_datagrid.product.attribute_type.einden_catalog_ephoto:
+#        column:
+#            type:        product_value_ephoto
+#            selector:    product_value_base
+#            frontend_type: html
+#        filter:
+#            type:        product_value_ephoto
+#            ftype:       boolean
+#            options:
+#                field_options:
+#                    attr:
+#                        empty_choice: true
+#        sorter:          ~
 
 services:
     einden.ephoto.catalog.attributetype.ephoto:
