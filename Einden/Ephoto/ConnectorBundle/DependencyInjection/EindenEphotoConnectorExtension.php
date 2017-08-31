@@ -38,7 +38,7 @@ class EindenEphotoConnectorExtension extends Extension implements PrependExtensi
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        //$loader->load('services.yml');
+        $loader->load('services.yml');
         //$loader->load('event_listener.yml');
         //$loader->load('converters.yml');
         //$loader->load('formatters.yml');

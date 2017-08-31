@@ -1,5 +1,0 @@
-parameters:
-    einden.ephoto.connector.provider.field.mam.class: Einden\Ephoto\ConnectorBundle\Enrich\Provider\Field\MamFieldProvider
-
-
-services:
