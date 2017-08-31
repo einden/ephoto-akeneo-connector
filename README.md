@@ -38,8 +38,7 @@ protected function registerProjectBundles()
 
 After all, run the following commands in your project root:
 ```bash
-php app/console cache:clear --env=prod --no-warmup
-php app/console cache:warmup --env=prod
+php app/console cache:clear --env=prod
 php app/console pim:installer:assets --env=prod
 php app/console oro:translation:dump en fr en_US en_UK fr_FR --env=prod
 ```
