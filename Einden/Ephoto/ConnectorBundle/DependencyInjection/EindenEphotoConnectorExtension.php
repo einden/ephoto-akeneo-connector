@@ -45,7 +45,7 @@ class EindenEphotoConnectorExtension extends Extension implements PrependExtensi
         $loader->load('attribute_types.yml');
         //$loader->load('comparators.yml');
         $loader->load('updaters.yml');
-        //$loader->load('filters.yml');
+        $loader->load('filters.yml');
 
         $this->loadAttributeIcons($loader, $container);
     }

@@ -26,10 +26,11 @@ class EphotoType extends AbstractAttributeType
 										'by_reference' => false,
 										'select2'      => true,
 										'attr'         => [
-												'data-tags' => 'jpg,mp4,html',
+												'data-tags' => 'jpg,png,mp4',
 										],
 								],
 						],
+						/*
 						'maximumCount'      => [
 								'name'      => 'maximumCount',
 								'fieldType' => 'number',
@@ -39,6 +40,7 @@ class EphotoType extends AbstractAttributeType
 										'help'          => 'info.attribute.max count files.help',
 								],
 						],
+						*/
 
 				];
 	}

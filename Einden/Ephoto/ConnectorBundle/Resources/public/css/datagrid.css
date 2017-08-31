@@ -1,0 +1,15 @@
+.product_value_ephoto .image {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  height: 40px;
+  width: 40px;
+}
+.product_value_ephoto .image img {
+  max-height: 40px;
+  max-width: 40px;
+}
+.product_value_ephoto .more {
+  color: #ccc;
+  font-size: 2em;
+}

@@ -1,0 +1,32 @@
+services:
+    einden.ephoto.listener.product.post_save:
+        class: Einden\Ephoto\ConnectorBundle\EventListener\ProductModificationListener
+        arguments:
+            - '@einden.ephoto'
+        tags:
+            - { name: kernel.event_listener, event: einden.storage.post_save, method: onPostSave }
+    einden.ephoto.listener.category.post_save:
+        class: Einden\Ephoto\ConnectorBundle\EventListener\CategoryModificationListener
+        arguments:
+            - '@einden.ephoto'
+        tags:
+            - { name: kernel.event_listener, event: einden.storage.post_save, method: onPostSave }
+    einden.ephoto.listener.channel.post_save:
+        class: Einden\Ephoto\ConnectorBundle\EventListener\ChannelModificationListener
+        arguments:
+            - '@einden.ephoto'
+        tags:
+            - { name: kernel.event_listener, event: einden.storage.post_save, method: onPostSave }
+    einden.ephoto.listener.deletion.post_save:
+        class: Einden\Ephoto\ConnectorBundle\EventListener\DeletedEntityListener
+        arguments:
+            - '@einden.ephoto'
+        tags:
+            - { name: kernel.event_listener, event: einden.storage.post_remove, method: onPostRemove }
+
+    einden.ephoto.listener.mass_remove.product:
+        class: Einden\Ephoto\ConnectorBundle\EventListener\DeletedEntityListener
+        arguments:
+            - '@einden.ephoto'
+        tags:
+            - { name: kernel.event_listener, event: pim_catalog.post_mass_remove.product, method: onMassRemoveProducts }

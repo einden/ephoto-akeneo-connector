@@ -1,5 +1,5 @@
 css:
     eindenephotoconnector:
         - bundles/eindenephotoconnector/css/configuration.css
-        #- bundles/eindenephotoconnector/css/asset-gallery.css
-        #- bundles/eikonatessaconnector/css/datagrid.less
+        #- bundles/eindenephotoconnector/css/asset-gallery.less
+        - bundles/eikonatessaconnector/css/datagrid.less

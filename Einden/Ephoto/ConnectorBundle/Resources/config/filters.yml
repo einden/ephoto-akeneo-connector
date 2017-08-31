@@ -1,0 +1,8 @@
+services:
+    einden.ephoto.datagrid.filter.product_value.einden_catalog_ephoto:
+          class: Einden\Ephoto\ConnectorBundle\DataGrid\Filter\ProductValue\EphotoBooleanFilter
+          arguments:
+              - '@form.factory'
+              - '@pim_filter.product_utility'
+          tags:
+              - { name: oro_filter.extension.orm_filter.filter, type: product_value_ephoto }
