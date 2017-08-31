@@ -1,37 +1,14 @@
-eikona_tessa_product_index:
-    path: /product
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:productIndex}
-    methods: [GET]
-eikona_tessa_product_show:
-    path: /product/{id}
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:productDetail}
-    methods: [GET]
-
-eikona_tessa_category_show:
-    path: /category/{id}
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:categoryDetail}
-    methods: [GET]
-eikona_tessa_category_index:
-    path: /category
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:categoryIndex}
-    methods: [GET]
-
-eikona_tessa_channel_index:
-    path: /channel
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:channelIndex}
-    methods: [GET]
-
-eikona_tessa_attribute_index:
+einden_ephoto_attribute_index:
     path: /attribute
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:attributeIndex}
+    defaults: { _controller: EindenEphotoConnectorBundle:Rest:attributeIndex}
     methods: [GET]
-eikona_tessa_attribute_show_by_id:
+einden_ephoto_attribute_show_by_id:
     path: /attribute/{id}
     requirements:
         id: '\d+'
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:attributeDetail}
+    defaults: { _controller: EindenEphotoConnectorBundle:Rest:attributeDetail}
     methods: [GET]
-eikona_tessa_attribute_show_by_code:
+einden_ephoto_attribute_show_by_code:
     path: /attribute/{code}
-    defaults: { _controller: EikonaTessaConnectorBundle:Rest:attributeDetailByCode}
+    defaults: { _controller: EindenEphotoConnectorBundle:Rest:attributeDetailByCode}
     methods: [GET]

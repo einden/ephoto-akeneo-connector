@@ -1,3 +1,5 @@
-#css:
-#    eindenephotoconnector:
-#        - bundles/eindenephotoconnector/css/asset-gallery.less
+css:
+    eindenephotoconnector:
+        - bundles/eindenephotoconnector/css/configuration.css
+        #- bundles/eindenephotoconnector/css/asset-gallery.css
+        #- bundles/eikonatessaconnector/css/datagrid.less
