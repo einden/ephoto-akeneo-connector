@@ -13,7 +13,7 @@ class ChannelModificationListener extends AbstractModificationListener
 		$subject = $event->getSubject();
 
 		if ($subject instanceof ChannelInterface) {
-			$this->ephoto->notifyAboutChannelModifications($subject);
+			#$this->ephoto->notifyAboutChannelModifications($subject);
 		}
 	}
 

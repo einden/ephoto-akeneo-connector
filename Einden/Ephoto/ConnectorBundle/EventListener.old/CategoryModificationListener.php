@@ -13,7 +13,7 @@ class CategoryModificationListener extends AbstractModificationListener
         $subject = $event->getSubject();
 
         if ($subject instanceof CategoryInterface) {
-            $this->ephoto->notifyAboutCategoryModifications($subject);
+           #$this->ephoto->notifyAboutCategoryModifications($subject);
         }
     }
 

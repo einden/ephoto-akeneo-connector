@@ -13,7 +13,7 @@ class ProductModificationListener extends AbstractModificationListener
         $subject = $event->getSubject();
 
         if ($subject instanceof ProductInterface) {
-            $this->ephoto->notifyAboutProductModifications($subject);
+            #$this->ephoto->notifyAboutProductModifications($subject);
         }
 
 

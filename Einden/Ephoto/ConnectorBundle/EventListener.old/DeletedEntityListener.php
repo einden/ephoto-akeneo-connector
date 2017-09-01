@@ -19,7 +19,7 @@ class DeletedEntityListener extends AbstractModificationListener
 	public function onMassRemoveProducts(GenericEvent $event)
 	{
 		foreach ($event->getSubject() as $productId) {
-			$this->ephoto->notifyAboutEntityDeletion($productId, new Product());
+			#$this->ephoto->notifyAboutEntityDeletion($productId, new Product());
 		}
 	}
 }
