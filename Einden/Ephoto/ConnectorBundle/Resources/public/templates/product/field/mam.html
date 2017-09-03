@@ -2,12 +2,13 @@
 
     <div class="asset-collection-picker">
         <div class="EindenAssetGallery">
+           
             <div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
-                <span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon add-asset icons-holder-text"><i
-                        class="AknButton-icon icon-ok"></i>ePhoto</span>
+                <span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon add-asset icons-holder-text">
+                <span class="AknButton-icon icon-file"></span>Sélectionner le fichier</span>
             </div>
+            
             <input name="asset-sids" type="text" placeholder="sids" value="<%= value.data %>">
-            <!--
             <ul class="EindenAssetGallery-list <%= assets.length == 0 ? 'empty' : '' %>">
                 <% _.each(assets, function(item){ %>
                 <li class="EindenAssetGallery-listitem">
@@ -18,7 +19,9 @@
                 </li>
                 <% }); %>
             </ul>
-            -->
+            <br><br> Debug :<br>
+            <textera name="asset-debug" style="display:block;background:#eee;width:100%;height:100px;border:1px solid #000">test</textera>
+            <!--
             <div class="placeholder">
                 <img src="/bundles/pimui/images/upload.png" alt="upload icon">
             </div>
@@ -29,6 +32,7 @@
                 _.__('ephoto.asset management.assets') %>
                 <%= _.__('ephoto.asset management.choosen') %>
             </footer>
+            -->
         </div>
     </div>
 </div>

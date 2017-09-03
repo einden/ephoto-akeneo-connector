@@ -3,14 +3,14 @@ parameters:
 
 
 services:
-    einden.ephoto:
-        class: 'Einden\Ephoto\ConnectorBundle\Ephoto'
-        arguments:
-            - '@oro_config.global'
-            - '@router'
-            - '@pim_serializer'
-            - '@kernel'
-            - '@logger'
+    #einden.ephoto:
+    #    class: 'Einden\Ephoto\ConnectorBundle\Ephoto'
+    #    arguments:
+    #        - '@oro_config.global'
+    #        - '@router'
+    #        - '@pim_serializer'
+    #        - '@kernel'
+    #        - '@logger'
     #einden.utilities.math:
     #    class: Einden\Ephoto\ConnectorBundle\Utilities\Math
     einden.ephoto.connector.provider.field.mam:
