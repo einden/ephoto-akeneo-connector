@@ -1,5 +1,0 @@
-services:
-    eikona.tessa.comparator.tessa_type:
-        class: Eikona\Tessa\ConnectorBundle\Comparator\Attribute\TessaComparator
-        tags:
-            - { name: pim_catalog.attribute.comparator }

@@ -1,0 +1,5 @@
+services:
+    einden.ephoto.comparator.ephoto_type:
+        class: Einden\Ephoto\ConnectorBundle\Comparator\Attribute\EphotoComparator
+        tags:
+            - { name: pim_catalog.attribute.comparator }

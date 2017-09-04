@@ -8,19 +8,23 @@
                 <span class="AknButton-icon icon-file"></span>Sélectionner le fichier</span>
             </div>
             
-            <input name="asset-sids" type="text" placeholder="sids" value="<%= value.data %>">
+            <input name="asset-sids" type="text" placeholder="sids" value="<%= value.data %>" style="display:block !important">
             <ul class="EindenAssetGallery-list <%= assets.length == 0 ? 'empty' : '' %>">
                 <% _.each(assets, function(item){ %>
                 <li class="EindenAssetGallery-listitem">
                     <!--suppress CssUnknownTarget -->
                     <div class="EindenAssetGallery-thumbnail"
-                         style="background-image: url('<%- item.url %>')">
+                         style="background-image:none">
                     </div>
                 </li>
                 <% }); %>
             </ul>
             <br><br> Debug :<br>
-            <textera name="asset-debug" style="display:block;background:#eee;width:100%;height:100px;border:1px solid #000">test</textera>
+            <textera name="asset-debug" style="display:block;background:#eee;width:100%;height:100px;border:1px solid #000">
+            	<% _.each(assets, function(item){ %>
+            	<%- item.url %> > <%- item.id %><br>
+            	<% }); %>
+            </textera>
             <!--
             <div class="placeholder">
                 <img src="/bundles/pimui/images/upload.png" alt="upload icon">

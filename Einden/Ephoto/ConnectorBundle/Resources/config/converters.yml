@@ -1,0 +1,15 @@
+services:
+    # Convertion données standards > données formulaires
+    einden.ephoto.array_converter.standard_to_flat.product.value_converter.tessa:
+        class: Einden\Ephoto\ConnectorBundle\ArrayConverter\StandardToFlat\Product\ValueConverter\EphotoValueConverter
+        arguments:
+            - '@pim_connector.array_converter.flat_to_standard.product.attribute_columns_resolver'
+        tags:
+            - { name: 'pim_connector.array_converter.standard_to_flat.product.value_converter' }
+
+    # Convertion données formulaires > données standard
+    einden.ephoto.array_converter.flat_to_standard.product.value_converter.tessa:
+        class: Einden\Ephoto\ConnectorBundle\ArrayConverter\FlatToStandard\Product\ValueConverter\EphotoValueConverter
+        parent: pim_connector.array_converter.flat_to_standard.product.value_converter.abstract
+        tags:
+            - { name: 'pim_connector.array_converter.flat_to_standard.product.value_converter' }
