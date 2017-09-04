@@ -11,7 +11,7 @@ define([
 
         var AssetSelectionView = Field.extend({
 
-			// utilisé par renderField()
+			// Prépare le template
 			fieldTemplate: _.template(fieldTemplate),
             
 			events: {
@@ -19,7 +19,6 @@ define([
 				'click .add-asset': 'selectFile'
             },
 
-            // Appelé à l'affichage de la page
 			initialize: function (attribute) {
                 AssetSelectionView.__super__.initialize.apply(this, arguments);
             },
@@ -27,40 +26,33 @@ define([
             // Appelé à l'affichage de la page
 			renderInput: function (context) {
 				if(!context.value.data) {
+					alert('vide');
+					
 					// context.value.data = "";
-					// fausses valeurs
-					context.value.data = "119723,119719";
+					context.value.data = 
+						'{"link":"https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",'+
+						'"thumbnail":"https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",'+
+						'"name":"00037610.JPG"}';
 				}
 					
                 // Appel de la méthode renderfield pour formaté les valeurs sauvegardés
-				// Retourne l'objet qui sera accessible dans le template
-				var field = this.renderField(context.value.data);
-
 				// Retourne le rendu html (le template avec les valeurs remplacées)
-				return field;
+				return this.renderField(context.value.data);
             },
 
             // Formate les valeurs sérialisées de la page en objet
 			renderField: function (value) {
-				// Contruit la liste des médias sous forme d'objet {id:integer, url:string}
-				var i, assets = [];
-				var values = value.split(',');
-				
-				for(i=0; i<values.length; i++) {
-                    if (!values[i]) return;
-                    
-					assets.push({
-                        id: values[i],
-                        url: ''
-                    });
-				}
+				var values = JSON.parse(value);
 
 				// la fonction fieldTemplate (lib underscore) remplace les valeurs dans le template
                 return this.fieldTemplate({
-                    // Value sera retourné à la validation XHR
-					value: value,
-                    // Assets va remplir le template
-					assets: assets
+                    // Valeur retourné à la validation XHR
+					value : value,
+                    
+					// Valeurs pour remplir le template
+					link : values.link,
+					thumbnail : values.thumbnail,
+					name : values.name,
                 });
             },
 

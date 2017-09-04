@@ -1,4 +1,4 @@
 css:
     eindenephotoconnector:
         - bundles/eindenephotoconnector/css/configuration.css
-        - bundles/eikonatessaconnector/css/datagrid.less
+        - bundles/eindenephotoconnector/css/datagrid.css

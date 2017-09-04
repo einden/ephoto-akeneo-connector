@@ -1,42 +1,22 @@
 <div class="AknAssetCollectionField">
+	<div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
+		<span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon add-asset icons-holder-text">
+		<span class="AknButton-icon icon-file"></span>Sélectionner le fichier</span>
+	</div>
 
-    <div class="asset-collection-picker">
-        <div class="EindenAssetGallery">
-           
-            <div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
-                <span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon add-asset icons-holder-text">
-                <span class="AknButton-icon icon-file"></span>Sélectionner le fichier</span>
-            </div>
-            
-            <input name="asset-sids" type="text" placeholder="sids" value="<%= value.data %>" style="display:block !important">
-            <ul class="EindenAssetGallery-list <%= assets.length == 0 ? 'empty' : '' %>">
-                <% _.each(assets, function(item){ %>
-                <li class="EindenAssetGallery-listitem">
-                    <!--suppress CssUnknownTarget -->
-                    <div class="EindenAssetGallery-thumbnail"
-                         style="background-image:none">
-                    </div>
-                </li>
-                <% }); %>
-            </ul>
-            <br><br> Debug :<br>
-            <textera id="debug" style="display:block;background:#eee;width:100%;height:100px;border:1px solid #000">
-            	<% _.each(assets, function(item){ %>
-            	<%- item.url %> > <%- item.id %><br>
-            	<% }); %>
-            </textera>
-            <!--
-            <div class="placeholder">
-                <img src="/bundles/pimui/images/upload.png" alt="upload icon">
-            </div>
-            <div class="clearfix"></div>
-            <footer>
-                <%= assets.length %> <%= assets.length == 1 ?
-                _.__('ephoto.asset management.asset') :
-                _.__('ephoto.asset management.assets') %>
-                <%= _.__('ephoto.asset management.choosen') %>
-            </footer>
-            -->
-        </div>
-    </div>
+	<div class="AknMediaField has-file">
+		<div class="AknMediaField-preview preview">
+
+			<div class="AknMediaField-thumb file"><img class="AknMediaField-image" src="<%= thumbnail %>"></div>
+
+			<div class="AknMediaField-info info">
+				<div class="filename" title="<%= name %>"><%= name %></div>
+				<div class="AknButtonList AknButtonList--centered actions">
+					<a href="<%= link %>" target="_blank" class="AknButtonList-item AknIconButton AknIconButton--grey open-media"><i class="icon icon-eye-open"></i></a>
+					<a href="javascript:;"><span class="AknButtonList-item AknIconButton AknIconButton--grey clear-field "><i class="icon icon-trash"></i></a>
+				</div>
+
+			</div>
+		</div>
+	</div> 
 </div>
