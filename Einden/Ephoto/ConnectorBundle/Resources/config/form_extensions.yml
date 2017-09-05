@@ -1,7 +1,7 @@
 extensions:
-    einden-ephoto-asset-selection-form:
-        module: einden/ephoto/connector/mam-asset-selection-form
-        targetZone: self
+    #einden-ephoto-asset-selection-form:
+    #    module: einden/ephoto/connector/mam-asset-selection-form
+    #    targetZone: self
     einden-ephoto-system-configuration:
         module: einden/ephoto/connector/system/configuration
         parent: oro-system-config-system
@@ -13,4 +13,4 @@ extensions:
         targetZone: self
         position: 100
 attribute_fields:
-    einden-ephoto-field: einden/ephoto/connector/einden-mam-field
+    einden-ephoto-field: einden/ephoto/connector/field-mam

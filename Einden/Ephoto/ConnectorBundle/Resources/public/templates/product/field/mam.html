@@ -1,7 +1,6 @@
 <div class="AknAssetCollectionField">
 	<div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
-		<span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon add-asset icons-holder-text">
-		<span class="AknButton-icon icon-file"></span>Sélectionner le fichier</span>
+		<span class="AknButtonList-item AknIconButton AknIconButton--grey add-asset" title="<%- _.__('ephoto.field.select_file') %>"><i class="icon icon-file"></i></span>
 	</div>
 
 	<div class="AknMediaField has-file">
@@ -12,10 +11,10 @@
 			<div class="AknMediaField-info info">
 				<div class="filename" title="<%= name %>"><%= name %></div>
 				<div class="AknButtonList AknButtonList--centered actions">
-					<a href="<%= link %>" target="_blank" class="AknButtonList-item AknIconButton AknIconButton--grey open-media"><i class="icon icon-eye-open"></i></a>
-					<a href="javascript:;"><span class="AknButtonList-item AknIconButton AknIconButton--grey clear-field "><i class="icon icon-trash"></i></a>
+					<span class="AknButtonList-item AknIconButton AknIconButton--grey display-file" title="<%- _.__('ephoto.field.view_file') %>"><i class="icon icon-eye-open"></i></span>
+					<a href="<%= download %>" class="AknButtonList-item AknIconButton AknIconButton--grey download-file" title="<%- _.__('ephoto.field.download_file') %>"><i class="icon icon-cloud-download"></i></a>
+					<span class="AknButtonList-item AknIconButton AknIconButton--grey remove-file clear-field" title="<%- _.__('ephoto.field.remove_file') %>"><i class="icon icon-trash"></i>
 				</div>
-
 			</div>
 		</div>
 	</div> 

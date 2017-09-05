@@ -1,5 +1,5 @@
 config:
     paths:
-        einden/ephoto/connector/einden-mam-field:                eindenephotoconnector/js/product/field/mam-field
+        einden/ephoto/connector/field-mam:                eindenephotoconnector/js/product/field/mam
         einden/ephoto/connector/system/configuration:               eindenephotoconnector/js/form/system
         einden/ephoto/connector/attributes/product-info:            eindenephotoconnector/js/product/form/attributes/product-info

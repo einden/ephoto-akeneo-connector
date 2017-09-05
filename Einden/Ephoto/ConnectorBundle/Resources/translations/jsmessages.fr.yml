@@ -1,10 +1,14 @@
 ephoto:
+  field:
+    select_file: Sélectionner un fichier
+    view_file: Voir le fichier
+    download_file: Télécharger le fichier
+    remove_file: Retirer le fichier
   configuration:
     base_url:
       label: URL du serveur
       placeholder : https://ephoto.entreprise.fr/
-    tab:
-      label: ePhoto
+    tab: ePhoto
     copyright:
       label: © 2017 Einden. Tous droits réservés.
       url: https://www.ephoto.fr

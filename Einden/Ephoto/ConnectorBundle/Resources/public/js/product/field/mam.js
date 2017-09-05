@@ -1,22 +1,25 @@
 'use strict';
 
 define([
-        'pim/field',
+        'jquery',
+		'pim/field',
         'underscore',
         'text!eindenephotoconnector/templates/product/field/mam.html',
-    ], function (Field,
-                 _,
-                 fieldTemplate,
-		) {
+		'jquery.slimbox',
+    ], function ($, Field, _, fieldTemplate) {
 
         var AssetSelectionView = Field.extend({
 
+			values: null,
+			
 			// Prépare le template
 			fieldTemplate: _.template(fieldTemplate),
             
 			events: {
-                // Evénement lors du clic sur le bouton (= "onclick")
-				'click .add-asset': 'selectFile'
+                // Déclaration des événements
+				'click .display-file': 'displayFile',
+				'click .add-file': 'selectFile',
+				'click .remove-file': 'removeFile',
             },
 
 			initialize: function (attribute) {
@@ -30,44 +33,42 @@ define([
 					
 					// context.value.data = "";
 					context.value.data = 
-						'{"link":"https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",'+
+						'{"file":"https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",'+
 						'"thumbnail":"https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",'+
 						'"name":"00037610.JPG"}';
 				}
-					
-                // Appel de la méthode renderfield pour formaté les valeurs sauvegardés
-				// Retourne le rendu html (le template avec les valeurs remplacées)
-				return this.renderField(context.value.data);
-            },
-
-            // Formate les valeurs sérialisées de la page en objet
-			renderField: function (value) {
-				var values = JSON.parse(value);
-
+				
+				// Décode les valeurs
+				this.values = JSON.parse(context.value.data);
+	
 				// la fonction fieldTemplate (lib underscore) remplace les valeurs dans le template
                 return this.fieldTemplate({
                     // Valeur retourné à la validation XHR
-					value : value,
+					value : context.value.data,
                     
 					// Valeurs pour remplir le template
-					link : values.link,
-					thumbnail : values.thumbnail,
-					name : values.name,
+					download : this.values.file + '&download',
+					thumbnail : this.values.thumbnail,
+					name : this.values.name,
                 });
             },
 
-            // Non utilisé
-			//updateModel: function () {
-            //},
-
-            // Appelé au clic sur "Sélectionner le fichier"
-			selectFile: function () {
+            // Sélectionner un fichier
+			selectFile: function() {
 				alert('select ePhoto...');
+
+            },
+			
+			// Retirer un fichier
+			removeFile: function() {
+				alert('remove file');
 				
-				// Deferred est une méthode JQuery qui permet...
-				//var deferred = $.Deferred();
-                //return deferred.promise();
-            }			
+			},
+			
+			// Afficher un fichier
+            displayFile: function () {
+				$.slimbox(this.values.file, '', {overlayOpacity: 0.3});
+            },
         });
 
 		return AssetSelectionView;

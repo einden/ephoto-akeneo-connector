@@ -22,7 +22,7 @@ define([
                 'change .ephoto-config': 'updateModel'
             },
             isGroup: true,
-            label: __('ephoto.configuration.tab.label'),
+            label: __('ephoto.configuration.tab'),
             template: _.template(template),
 
             render: function () {
