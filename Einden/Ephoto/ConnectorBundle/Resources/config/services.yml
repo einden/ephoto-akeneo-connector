@@ -1,9 +1,5 @@
-parameters:
-    einden.ephoto.connector.provider.field.mam.class: Einden\Ephoto\ConnectorBundle\Enrich\Provider\Field\MamFieldProvider
-
-
 services:
     einden.ephoto.connector.provider.field.mam:
-        class: %einden.ephoto.connector.provider.field.mam.class%
+        class: Einden\Ephoto\ConnectorBundle\Enrich\Provider\Field\MamFieldProvider
         tags:
             - { name: pim_enrich.provider.field, priority: 90 }

@@ -16,8 +16,8 @@ class EphotoValueConverter extends AbstractValueConverter
 	/**
 	 * Converts a value
 	 *
-	 * @param string $attributeCode
-	 * @param mixed  $data
+	 * @param string $attributeFieldInfo
+	 * @param mixed $value
 	 *
 	 * @return array
 	 */
@@ -39,29 +39,7 @@ class EphotoValueConverter extends AbstractValueConverter
 				],
 		];
 
-		$data = $result[$attributeFieldInfo['attribute']->getCode()][0]['data'];
-
-		if (trim($data) === '') {
-			return $result;
-		}
-
-		$convertedValues = array_map(
-				function ($url) {
-					$matches = null;
-					preg_match('/asset\_system\_id\=(\d+)/', $url, $matches);
-
-					return $matches[1];
-				},
-				explode(';', $data)
-		);
-		
-		$result[$attributeFieldInfo['attribute']->getCode()][0]['data'] = implode(
-				',',
-				$convertedValues
-		);
-
 		return $result;
-
 	}
 
 }

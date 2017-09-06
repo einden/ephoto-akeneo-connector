@@ -14,14 +14,14 @@ class EphotoValueConverter extends AbstractValueConverter implements ValueConver
 	}
 
 	/**
-	 * Converts a value (A REVOIR)
+	 * Converts a value
 	 *
 	 * @param string $attributeCode
-	 * @param mixed  $data
+	 * @param array  $data
 	 *
 	 * @return array
 	 */
-	public function convert($attributeCode, $data)
+	public function convert(string $attributeCode, array $data)
 	{
 		$convertedItem = [];
 
@@ -32,37 +32,9 @@ class EphotoValueConverter extends AbstractValueConverter implements ValueConver
 					$value['scope']
 			);
 
-			$convertedItem[$flatName] = $this->convertAssetIdsToUrls(
-					$value['data'],
-					$value['scope']
-			);
+			$convertedItem[$flatName] = $value['data'];
 		}
 
 		return $convertedItem;
-	}
-
-	/**
-	 * A REVOIR
-	 * @param string $data
-	 * @param string $scope
-	 *
-	 * @return string
-	 */
-	private function convertAssetIdsToUrls($data, $scope)
-	{
-		if (trim($data) === '') {
-			return '';
-		}
-
-		$arr_exploded = explode(',', $data);
-		
-		$arr_exploded = array_map(
-				function ($assetId) use ($scope) {
-					return "id=$assetId&kanal=$scope";
-				
-				}, $arr_exploded
-		);
-
-		return implode(';', $arr_exploded);
 	}
 }

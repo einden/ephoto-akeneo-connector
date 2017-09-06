@@ -2,11 +2,11 @@
 
 define([
         'jquery',
+		'underscore',
 		'pim/field',
-        'underscore',
         'text!eindenephotoconnector/templates/product/field/mam.html',
 		'jquery.slimbox',
-    ], function ($, Field, _, fieldTemplate) {
+    ], function ($, _, Field, fieldTemplate) {
 
         var AssetSelectionView = Field.extend({
 
@@ -14,7 +14,7 @@ define([
 			
 			// Prépare le template
 			fieldTemplate: _.template(fieldTemplate),
-            
+
 			events: {
                 // Déclaration des événements
 				'click .display-file': 'displayFile',

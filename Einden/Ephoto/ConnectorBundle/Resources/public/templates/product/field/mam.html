@@ -1,6 +1,6 @@
 <div class="AknAssetCollectionField">
 	<div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
-		<span class="AknButtonList-item AknIconButton AknIconButton--grey add-asset" title="<%- _.__('ephoto.field.select_file') %>"><i class="icon icon-file"></i></span>
+		<span class="AknButtonList-item AknIconButton AknIconButton--grey add-file" title="<%- _.__('ephoto.field.select_file') %>"><i class="icon icon-file"></i></span>
 	</div>
 
 	<div class="AknMediaField has-file">
@@ -9,7 +9,7 @@
 			<div class="AknMediaField-thumb file"><img class="AknMediaField-image" src="<%= thumbnail %>"></div>
 
 			<div class="AknMediaField-info info">
-				<div class="filename" title="<%= name %>"><%= name %></div>
+				<div class="filename"><%= name %></div>
 				<div class="AknButtonList AknButtonList--centered actions">
 					<span class="AknButtonList-item AknIconButton AknIconButton--grey display-file" title="<%- _.__('ephoto.field.view_file') %>"><i class="icon icon-eye-open"></i></span>
 					<a href="<%= download %>" class="AknButtonList-item AknIconButton AknIconButton--grey download-file" title="<%- _.__('ephoto.field.download_file') %>"><i class="icon icon-cloud-download"></i></a>

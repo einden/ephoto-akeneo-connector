@@ -19,18 +19,6 @@ class EphotoType extends AbstractAttributeType
 	protected function defineCustomAttributeProperties(AttributeInterface $attribute)
 	{
 		return parent::defineCustomAttributeProperties($attribute) + [
-						'allowedExtensions' => [
-								'name'    => 'allowedExtensions',
-								'data'    => implode(',', $attribute->getAllowedExtensions()),
-								'options' => [
-										'by_reference' => false,
-										'select2'      => true,
-										'attr'         => [
-												'data-tags' => 'jpg,png,mp4',
-										],
-								],
-						],
-						/*
 						'maximumCount'      => [
 								'name'      => 'maximumCount',
 								'fieldType' => 'number',
@@ -40,7 +28,6 @@ class EphotoType extends AbstractAttributeType
 										'help'          => 'info.attribute.max count files.help',
 								],
 						],
-						*/
 
 				];
 	}
