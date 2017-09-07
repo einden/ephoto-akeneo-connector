@@ -5,8 +5,9 @@ define([
 		'underscore',
 		'pim/field',
         'text!eindenephotoconnector/templates/product/field/mam.html',
+		'routing',
 		'jquery.slimbox',
-    ], function ($, _, Field, fieldTemplate) {
+    ], function ($, _, Field, fieldTemplate, Routing) {
 
         var AssetSelectionView = Field.extend({
 
@@ -40,7 +41,7 @@ define([
 				
 				// Décode les valeurs
 				this.values = JSON.parse(context.value.data);
-	
+
 				// la fonction fieldTemplate (lib underscore) remplace les valeurs dans le template
                 return this.fieldTemplate({
                     // Valeur retourné à la validation XHR
@@ -56,7 +57,13 @@ define([
             // Sélectionner un fichier
 			selectFile: function() {
 				alert('select ePhoto...');
-
+				
+				var query = Routing.generate('einden_ephoto_get_config');
+				
+				$.getJSON(query, function(result) {
+					console.log(result);
+					alert('ok');
+				});
             },
 			
 			// Retirer un fichier

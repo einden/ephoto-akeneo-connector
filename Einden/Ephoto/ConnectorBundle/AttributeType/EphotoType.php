@@ -28,7 +28,6 @@ class EphotoType extends AbstractAttributeType
 										'help'          => 'info.attribute.max count files.help',
 								],
 						],
-
 				];
 	}
 }

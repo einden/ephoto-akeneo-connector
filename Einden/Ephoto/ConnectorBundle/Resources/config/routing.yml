@@ -1,0 +1,4 @@
+einden_ephoto_get_config:
+    path: /ephoto/config
+    defaults: { _controller: EindenEphotoConnectorBundle:Rest:getConfig }
+    methods: [GET]	
