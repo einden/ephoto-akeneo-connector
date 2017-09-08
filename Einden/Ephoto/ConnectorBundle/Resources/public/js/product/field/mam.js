@@ -11,43 +11,59 @@ define([
 
         var AssetSelectionView = Field.extend({
 
-			values: null,
+			// Configuration
+			config: null,
 			
+			// Les valeurs courantes
+			values: null,
+
 			// Prépare le template
 			fieldTemplate: _.template(fieldTemplate),
 
+			// Déclaration des événements
 			events: {
-                // Déclaration des événements
 				'click .display-file': 'displayFile',
 				'click .add-file': 'selectFile',
 				'click .remove-file': 'removeFile',
-            },
+            },		
 
+			// Initialisation
 			initialize: function (attribute) {
-                AssetSelectionView.__super__.initialize.apply(this, arguments);
+				AssetSelectionView.__super__.initialize.apply(this, arguments);
+
+				// Chargement de la configuration
+				$.getJSON(Routing.generate('einden_ephoto_get_config'), function(result) {
+					
+					this.config = result;
+
+					if(typeof this.config !== 'object' || typeof this.config.baseurl !== 'string' || !this.config.baseurl.length) {
+						alert('An error has occurred !');
+						return;
+					}
+					
+					// Chargement de l'API
+					if(typeof ePhoto === 'undefined') {
+						$.getScript( this.config.baseurl + 'api/apiJS.js', function( data, textStatus, jqxhr ) {
+							if(jqxhr.status !== 200) {
+								alert('The ePhoto server is unavailable !');
+								return;	
+							}
+						});
+					}
+	
+				}.bind(this));
             },
 
             // Appelé à l'affichage de la page
 			renderInput: function (context) {
-				if(!context.value.data) {
-					alert('vide');
-					
-					// context.value.data = "";
-					context.value.data = 
-						'{"file":"https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",'+
-						'"thumbnail":"https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",'+
-						'"name":"00037610.JPG"}';
-				}
 				
-				// Décode les valeurs
-				this.values = JSON.parse(context.value.data);
+				// Charge les valeurs
+				if(null === this.values) {
+					this.values = JSON.parse(context.value.data ? context.value.data : '{}');
+				}
 
-				// la fonction fieldTemplate (lib underscore) remplace les valeurs dans le template
+				// Retourne le template formaté
                 return this.fieldTemplate({
-                    // Valeur retourné à la validation XHR
-					value : context.value.data,
-                    
-					// Valeurs pour remplir le template
 					download : this.values.file + '&download',
 					thumbnail : this.values.thumbnail,
 					name : this.values.name,
@@ -56,20 +72,31 @@ define([
 
             // Sélectionner un fichier
 			selectFile: function() {
-				alert('select ePhoto...');
+				if(typeof ePhoto === 'undefined') {
+					alert('The ePhoto server is unavailable !');
+					return;
+				}
+
+				this.values = {
+					"file" : "https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",
+					"thumbnail" : "https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",
+					"name" : "00037610.JPG"
+				};
 				
-				var query = Routing.generate('einden_ephoto_get_config');
-				
-				$.getJSON(query, function(result) {
-					console.log(result);
-					alert('ok');
-				});
+				this.updateField();
             },
 			
 			// Retirer un fichier
 			removeFile: function() {
-				alert('remove file');
-				
+				this.values = {};
+
+				this.updateField();
+			},
+			
+			// Met à jour le champ
+			updateField: function() {
+				this.setCurrentValue(JSON.stringify(this.values));
+				this.render();
 			},
 			
 			// Afficher un fichier

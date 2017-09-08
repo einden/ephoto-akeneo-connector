@@ -18,7 +18,7 @@ class RestController extends Controller
 		$config = $this->get('oro_config.global');
 		
 		$values = array(
-			'base_url' => $config->get('pim_einden_ephoto_connector.base_url')
+			'baseurl' => $config->get('pim_einden_ephoto_connector.base_url')
 		);
 
 		return new JsonResponse($values);
