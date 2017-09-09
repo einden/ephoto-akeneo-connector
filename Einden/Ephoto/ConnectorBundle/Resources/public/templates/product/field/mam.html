@@ -10,9 +10,9 @@
 
 			<div class="AknMediaField-info info">
 				<div class="filename"><%= name %></div>
-				<div class="AknButtonList AknButtonList--centered actions">
+				<div id="<%= id %>-EindenEphotoConnector-action" class="AknButtonList AknButtonList--centered actions">
 					<span class="AknButtonList-item AknIconButton AknIconButton--grey display-file" title="<%- _.__('ephoto.field.view_file') %>"><i class="icon icon-eye-open"></i></span>
-					<a href="<%= download %>" class="AknButtonList-item AknIconButton AknIconButton--grey download-file" title="<%- _.__('ephoto.field.download_file') %>"><i class="icon icon-cloud-download"></i></a>
+					<span class="AknButtonList-item AknIconButton AknIconButton--grey download-file" title="<%- _.__('ephoto.field.download_file') %>"><i class="icon icon-cloud-download"></i></span>
 					<span class="AknButtonList-item AknIconButton AknIconButton--grey remove-file clear-field" title="<%- _.__('ephoto.field.remove_file') %>"><i class="icon icon-trash"></i>
 				</div>
 			</div>

@@ -25,6 +25,7 @@ define([
 				'click .display-file': 'displayFile',
 				'click .add-file': 'selectFile',
 				'click .remove-file': 'removeFile',
+				'click .download-file': 'downloadFile',
             },		
 
 			// Initialisation
@@ -64,7 +65,7 @@ define([
 
 				// Retourne le template formaté
                 return this.fieldTemplate({
-					download : this.values.file + '&download',
+					id : this.attribute.id,
 					thumbnail : this.values.thumbnail,
 					name : this.values.name,
                 });
@@ -82,7 +83,7 @@ define([
 					"thumbnail" : "https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",
 					"name" : "00037610.JPG"
 				};
-				
+
 				this.updateField();
             },
 			
@@ -92,17 +93,26 @@ define([
 
 				this.updateField();
 			},
+
+			// Télécharger un fichier
+			downloadFile: function() {
+				if(typeof this.values.file !== 'string') return;
+				
+				window.location.href = this.values.file + '&download';
+			},
+			
+			// Afficher un fichier
+            displayFile: function () {
+				if(typeof this.values.file !== 'string') return;
+				
+				$.slimbox(this.values.file, '', {overlayOpacity: 0.3});
+            },
 			
 			// Met à jour le champ
 			updateField: function() {
 				this.setCurrentValue(JSON.stringify(this.values));
 				this.render();
-			},
-			
-			// Afficher un fichier
-            displayFile: function () {
-				$.slimbox(this.values.file, '', {overlayOpacity: 0.3});
-            },
+			},			
         });
 
 		return AssetSelectionView;
