@@ -11,6 +11,9 @@ define([
 
 		var AssetSelectionView = Field.extend({
 
+			// Instance ePhoto API
+			api: null,
+			
 			// Configuration
 			config: null,
 
@@ -31,6 +34,8 @@ define([
 			// Initialisation
 			initialize: function (attribute) {
 				AssetSelectionView.__super__.initialize.apply(this, arguments);
+				
+				$('#EphotoField-' + this.attribute.id + '.select').hide();
 
 				// Chargement de la configuration
 				if(null === this.config) {
@@ -55,11 +60,23 @@ define([
 								$.getScript(
 									this.config.baseurl + 'api/apiJS.js',
 									function( data, textStatus, jqxhr ) {
-										if(jqxhr.status !== 200) {
+										if(jqxhr.status !== 200 || typeof ePhoto === 'undefined') {
 											alert('The ePhoto server is unavailable !');
 											return;	
 										}
-									}
+
+										this.api=new ePhoto({ server: this.config.baseurl });
+										this.api.connect();
+										
+										this.api.File.setMode('link');
+										
+										// obj.File.setButtons( obj.IMAGE_FILES, [{'size':'200'},  {'size':'600'}] );
+										this.api.File.setButtons( this.api.IMAGE_FILES, [{'size':'320'}, {'size':'1200'}] );
+										
+										//$('#EphotoField-' + this.attribute.id + '.select').show();
+									
+									}.bind(this)
+								
 								);
 							}
 
@@ -79,14 +96,15 @@ define([
 				}
 				
 				// Complète les valeurs
-				var inc, assets = this.assets.slice(), id = this.attribute.id + '-';
+				var inc, assets = this.assets.slice();
 				
 				for(inc in assets) {
-					assets[inc].id = id + inc;
+					assets[inc].id = this.attribute.id + '-' + inc;
 				}
 
 				// Retourne le template formaté
                 return this.fieldTemplate({
+					id : this.attribute.id,
 					assets : assets
                 });
             },
@@ -98,12 +116,29 @@ define([
 					return;
 				}
 
+				this.api.File.callOnFileReceived(this.insertFile);
+			},
+			
+			// Insert le fichier
+			insertFile: function(result) {
+				if(result === 'failure') {
+					alert('Une erreur a été rencontrée !');
+					return;
+				}
+				
+				if(result === 'fileDoesNotExist') {
+					alert('Aucun fichier sélectionné !');
+					return;
+				}
+				
+				console.log(result);
+
 				this.assets.push({
 					file : "https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",
 					thumbnail : "https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",
 					name : "00037610"
 				});
-
+				
 				this.updateField();
 			},
 			
