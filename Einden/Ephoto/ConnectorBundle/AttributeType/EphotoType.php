@@ -16,9 +16,11 @@ class EphotoType extends AbstractAttributeType
 		return 'einden_catalog_ephoto';
 	}
 
+	/*
+	Example for add custom properties :
 	protected function defineCustomAttributeProperties(AttributeInterface $attribute)
 	{
-		return parent::defineCustomAttributeProperties($attribute) + [
+		$properties = parent::defineCustomAttributeProperties($attribute) + [
 						'maximumCount'      => [
 								'name'      => 'maximumCount',
 								'fieldType' => 'number',
@@ -29,5 +31,8 @@ class EphotoType extends AbstractAttributeType
 								],
 						],
 				];
+
+		return $properties;
 	}
+	*/
 }

@@ -71,6 +71,7 @@ class EphotoAttributeSetter extends AbstractAttributeSetter
 					$scope
 			);
 		}
+
 		if (is_string($data) && '' === trim($data)) {
 			$data = null;
 		}

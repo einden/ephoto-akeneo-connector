@@ -17,7 +17,7 @@ services:
     einden.ephoto.catalog.attributetype.ephoto:
       class: Einden\Ephoto\ConnectorBundle\AttributeType\EphotoType
       arguments:
-          - varchar
+          - text
           - text
           - '@pim_catalog.validator.constraint_guesser.chained_attribute'
       tags:

@@ -8,7 +8,7 @@ namespace Einden\Ephoto\ConnectorBundle\Enrich\Provider\Field;
 use Pim\Bundle\EnrichBundle\Provider\Field\FieldProviderInterface;
 use Pim\Component\Catalog\Model\AttributeInterface;
 
-class MamFieldProvider implements FieldProviderInterface
+class EphotoFieldProvider implements FieldProviderInterface
 {
 	public function getField($attribute)
 	{

@@ -1,0 +1,23 @@
+<div class="AknAssetCollectionField" style="border-bottom:0">
+	<div class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
+		<span class="AknButtonList-item AknIconButton AknIconButton--grey add-file" title="<%- _.__('ephoto.field.select_file') %>"><i class="icon icon-file"></i></span>
+	</div>
+
+	<% _.each(assets, function(asset){ %>
+	<div id="EphotoAsset-<%= asset.id %>" class="AknMediaField has-file" style="border-bottom: 1px solid #ccd1d8">
+		<div class="AknMediaField-preview preview">
+
+			<div class="AknMediaField-thumb file"><img class="AknMediaField-image" src="<%= asset.thumbnail %>" title="<%= asset.name %>"></div>
+
+			<div class="AknMediaField-info info">
+				<div class="filename"><%= asset.name %></div>
+				<div class="AknButtonList AknButtonList--centered actions">
+					<span id="EphotoAsset-<%= asset.id %>.display" class="AknButtonList-item AknIconButton AknIconButton--grey display-file" title="<%- _.__('ephoto.field.view_file') %>"><i class="icon icon-eye-open"></i></span>
+					<span id="EphotoAsset-<%= asset.id %>.download" class="AknButtonList-item AknIconButton AknIconButton--grey download-file" title="<%- _.__('ephoto.field.download_file') %>"><i class="icon icon-cloud-download"></i></span>
+					<span id="EphotoAsset-<%= asset.id %>.remove" class="AknButtonList-item AknIconButton AknIconButton--grey remove-file clear-field" title="<%- _.__('ephoto.field.remove_file') %>"><i class="icon icon-trash"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% }); %> 
+</div>
