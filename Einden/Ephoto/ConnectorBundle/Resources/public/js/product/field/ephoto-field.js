@@ -11,6 +11,9 @@ define([
 
 		var AssetSelectionView = Field.extend({
 
+			// ID du bundle Akeneo
+			CLIENT : 'D61e2620',
+			
 			// Instance ePhoto API
 			api: null,
 			
@@ -33,65 +36,90 @@ define([
 
 			// Initialisation
 			initialize: function (attribute) {
+				console.log('initialize');
+				
 				AssetSelectionView.__super__.initialize.apply(this, arguments);
 				
-				$('#EphotoField-' + this.attribute.id + '.select').hide();
+				this.initializeEphoto();
+			},
+			
+			// Initialisation de l'API ePhoto
+			initializeEphoto: function() {
+				
+				if(null !== this.config) return;
 
-				// Chargement de la configuration
-				if(null === this.config) {
-					$.getJSON(
-						Routing.generate('einden_ephoto_get_config'),
-						function(result) {
-							this.config = result;
+				console.log('initializeEphoto');
+				
+				// Une première déclaration pour éviter les multiples initialisations
+				this.config = {};
+				
+				$.getJSON(
+					Routing.generate('einden_ephoto_get_config'),
+					function(result) {
+						this.config = result;
 
-							var configchecked = (
-								typeof this.config === 'object' &&
-								typeof this.config.baseurl === 'string' &&
-								this.config.baseurl.length
+						var configchecked = (
+							typeof this.config === 'object' &&
+							typeof this.config.baseurl === 'string' &&
+							this.config.baseurl.length
+						);
+
+						if(!configchecked) {
+							alert('An error has occurred !');
+							return;
+						}
+
+						// Chargement de l'API
+						if(typeof ePhoto === 'undefined') {
+							console.log('initialize API');
+							
+							$.getScript(
+								this.config.baseurl + 'api/apiJS.js',
+								function( data, textStatus, jqxhr ) {
+									if(jqxhr.status !== 200 || typeof ePhoto === 'undefined') {
+										alert('The ePhoto server is unavailable !');
+										return;	
+									}
+
+									this.api=new ePhoto({
+										server : this.config.baseurl,
+										onConnect : this.apiConnected.bind(this),
+										client : this.CLIENT 
+									});
+
+									this.api.connect();
+
+									this.api.File.setMode('link');
+
+									this.api.File.setButtons(this.api.IMAGE_FILES, [{'definition':'middle'}]);
+
+									this.api.File.callOnFileReceived(this.insertFile.bind(this));
+
+								}.bind(this)
+
 							);
+						}
 
-							if(!configchecked) {
-								alert('An error has occurred !');
-								return;
-							}
-
-							// Chargement de l'API
-							if(typeof ePhoto === 'undefined') {
-								$.getScript(
-									this.config.baseurl + 'api/apiJS.js',
-									function( data, textStatus, jqxhr ) {
-										if(jqxhr.status !== 200 || typeof ePhoto === 'undefined') {
-											alert('The ePhoto server is unavailable !');
-											return;	
-										}
-
-										this.api=new ePhoto({ server: this.config.baseurl });
-										this.api.connect();
-										
-										this.api.File.setMode('link');
-										
-										// obj.File.setButtons( obj.IMAGE_FILES, [{'size':'200'},  {'size':'600'}] );
-										this.api.File.setButtons( this.api.IMAGE_FILES, [{'size':'320'}, {'size':'1200'}] );
-										
-										//$('#EphotoField-' + this.attribute.id + '.select').show();
-									
-									}.bind(this)
-								
-								);
-							}
-
-						}.bind(this)
-					);
-				}
+					}.bind(this)
+				);
+			},
+			
+			apiConnected: function() {
+				alert('API connected');
+				
+				//var i = '#EphotoField-' + this.attribute.id + '.select';
+				//console.log(i);
+				//console.log(document.getElementById(i));
+				//$(i).css('visibility', 'hidden');
 			},
 
 			// Rendu du champ
+			// Note : renderInput se fait avant initialize()
 			renderInput: function (context) {
+				console.log('renderInput');
 
 				// Charge les actifs au premier chargement
 				if(null === this.assets) {
-					console.log('chargement : ' + context.value.data);
-
 					this.assets = context.value.data ? JSON.parse(context.value.data) : [];
 				}
 				
@@ -111,12 +139,15 @@ define([
 
             // Sélectionner un fichier
 			selectFile: function () {
-				if(typeof ePhoto === 'undefined') {
+				console.log('selectFile');
+				console.log(this.api);
+				
+				if(!this.api || !this.api.isConnected()) {
 					alert('The ePhoto server is unavailable !');
 					return;
 				}
-
-				this.api.File.callOnFileReceived(this.insertFile);
+				
+				this.api.File.get();
 			},
 			
 			// Insert le fichier
@@ -126,15 +157,13 @@ define([
 					return;
 				}
 				
-				if(result === 'fileDoesNotExist') {
+				if(result === 'fileDoesNotExist' || result === 'no authentication') {
 					alert('Aucun fichier sélectionné !');
 					return;
 				}
-				
-				console.log(result);
 
 				this.assets.push({
-					file : "https://vmware.ephoto.fr/link/AjcAOgt8USwOfwUnBWxTMAR5Azw",
+					file : result,
 					thumbnail : "https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",
 					name : "00037610"
 				});
