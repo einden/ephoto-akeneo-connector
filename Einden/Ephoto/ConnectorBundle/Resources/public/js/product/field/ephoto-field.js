@@ -36,6 +36,8 @@ define([
 
 			/**
 			 * Initialisation
+			 *
+			 * @param {??} Attibute			 
 			 */				
 			initialize: function (attribute) {
 				AssetSelectionView.__super__.initialize.apply(this, arguments);
@@ -98,6 +100,8 @@ define([
 				this.api.connect();
 
 				this.api.File.setMode('link');
+				
+				this.api.File.enableDCore();
 
 				this.api.File.setButtons(this.api.IMAGE_FILES, [{'definition':'middle'}]);
 
@@ -113,6 +117,8 @@ define([
 
 			/**
 			 * Rendu du champ
+			 *
+			 * @param {object} Le contexte		 
 			 */				
 			renderInput: function (context) {
 				// Charge les actifs au premier chargement
@@ -148,29 +154,36 @@ define([
 			
 			/**
 			 * Insert le fichier
+			 *
+			 * @param {string} le lien vers l'image
+			 * @param {xml} les métadonnées DublinCore XML
 			 */				
-			insertFile: function(result) {
-				if(result === 'failure') {
+			insertFile: function(file, dcore) {
+				if(file === 'failure') {
 					alert('Une erreur a été rencontrée !');
 					return;
 				}
 				
-				if(result === 'fileDoesNotExist' || result === 'no authentication') {
+				if(file === 'fileDoesNotExist' || file === 'no authentication') {
 					alert('Aucun fichier sélectionné !');
 					return;
 				}
 
-				this.assets.push({
-					file : result,
-					thumbnail : "https://vmware.ephoto.fr/small/m1p5e0izm5t9x.JPG",
-					name : "00037610"
-				});
+				// Extraction des métadonnées du XML DublinCore
+				var name = dcore.getElementsByTagName('dc:title')[0].childNodes[0].nodeValue;
+				
+				var thumbnail = dcore.getElementsByTagName('dc:source')[0].childNodes[0].nodeValue;
+				thumbnail = thumbnail.replace('media/', 'small/') + '.JPG';
+
+				this.assets.push({file : file, thumbnail : thumbnail, name : name});
 				
 				this.updateField();
 			},
 			
 			/**
 			 * Retirer un fichier
+			 *
+			 * @param {event}
 			 */				
 			removeFile: function (event) {
 				var item = this.getItem(event);
@@ -181,6 +194,8 @@ define([
 
 			/**
 			 * Télécharger un fichier
+			 *
+			 * @param {event}			 
 			 */				
 			downloadFile: function (event) {
 				var item = this.getItem(event);
@@ -191,6 +206,8 @@ define([
 			
 			/**
 			 * Afficher un fichier
+			 *
+			 * @param {event}			 
 			 */				
 			displayFile: function (event) {
 				var item = this.getItem(event);
@@ -201,6 +218,8 @@ define([
 			
 			/**
 			 * Retourne l'item sélectionné
+			 *
+			 * @param {event}
 			 */				
 			getItem: function (event) {
 				var el = event.currentTarget || event.srcElement;
