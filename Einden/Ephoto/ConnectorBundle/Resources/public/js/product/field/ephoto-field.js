@@ -34,25 +34,16 @@ define([
 				'click .download-file': 'downloadFile',
 			},
 
-			// Initialisation
+			/**
+			 * Initialisation
+			 */				
 			initialize: function (attribute) {
-				console.log('initialize');
-				
 				AssetSelectionView.__super__.initialize.apply(this, arguments);
 				
-				this.initializeEphoto();
-			},
-			
-			// Initialisation de l'API ePhoto
-			initializeEphoto: function() {
-				
-				if(null !== this.config) return;
+				if(null !== this.config) {
+					console.log('double initialisation ??');
+				}
 
-				console.log('initializeEphoto');
-				
-				// Une première déclaration pour éviter les multiples initialisations
-				this.config = {};
-				
 				$.getJSON(
 					Routing.generate('einden_ephoto_get_config'),
 					function(result) {
@@ -71,8 +62,6 @@ define([
 
 						// Chargement de l'API
 						if(typeof ePhoto === 'undefined') {
-							console.log('initialize API');
-							
 							$.getScript(
 								this.config.baseurl + 'api/apiJS.js',
 								function( data, textStatus, jqxhr ) {
@@ -81,43 +70,51 @@ define([
 										return;	
 									}
 
-									this.api=new ePhoto({
-										server : this.config.baseurl,
-										onConnect : this.apiConnected.bind(this),
-										client : this.CLIENT 
-									});
-
-									this.api.connect();
-
-									this.api.File.setMode('link');
-
-									this.api.File.setButtons(this.api.IMAGE_FILES, [{'definition':'middle'}]);
-
-									this.api.File.callOnFileReceived(this.insertFile.bind(this));
+									this.connect();
 
 								}.bind(this)
 
 							);
+						
+						} else {
+							this.connect();
 						}
 
 					}.bind(this)
 				);
 			},
-			
-			apiConnected: function() {
-				alert('API connected');
-				
-				//var i = '#EphotoField-' + this.attribute.id + '.select';
-				//console.log(i);
-				//console.log(document.getElementById(i));
-				//$(i).css('visibility', 'hidden');
+
+			/**
+			 * Initialisation de l'API ePhoto
+			 */	
+			connect: function() {
+				this.api=new ePhoto({
+					server : this.config.baseurl,
+					authID: this.getCookie('ephoto.akeneo.connector.authid'),
+					onConnect : this.isConnected.bind(this),
+					client : this.CLIENT 
+				});
+
+				this.api.connect();
+
+				this.api.File.setMode('link');
+
+				this.api.File.setButtons(this.api.IMAGE_FILES, [{'definition':'middle'}]);
+
+				this.api.File.callOnFileReceived(this.insertFile.bind(this));	
 			},
 
-			// Rendu du champ
-			// Note : renderInput se fait avant initialize()
-			renderInput: function (context) {
-				console.log('renderInput');
+			/**
+			 *
+			 */	
+			isConnected: function() {
+				this.setCookie('ephoto.akeneo.connector.authid', this.api.getAuthID());
+			},
 
+			/**
+			 * Rendu du champ
+			 */				
+			renderInput: function (context) {
 				// Charge les actifs au premier chargement
 				if(null === this.assets) {
 					this.assets = context.value.data ? JSON.parse(context.value.data) : [];
@@ -137,11 +134,10 @@ define([
                 });
             },
 
-            // Sélectionner un fichier
+			/**
+			 * Sélectionner un fichier
+			 */			
 			selectFile: function () {
-				console.log('selectFile');
-				console.log(this.api);
-				
 				if(!this.api || !this.api.isConnected()) {
 					alert('The ePhoto server is unavailable !');
 					return;
@@ -150,7 +146,9 @@ define([
 				this.api.File.get();
 			},
 			
-			// Insert le fichier
+			/**
+			 * Insert le fichier
+			 */				
 			insertFile: function(result) {
 				if(result === 'failure') {
 					alert('Une erreur a été rencontrée !');
@@ -171,7 +169,9 @@ define([
 				this.updateField();
 			},
 			
-			// Retirer un fichier
+			/**
+			 * Retirer un fichier
+			 */				
 			removeFile: function (event) {
 				var item = this.getItem(event);
 
@@ -179,7 +179,9 @@ define([
 				this.updateField();
 			},
 
-			// Télécharger un fichier
+			/**
+			 * Télécharger un fichier
+			 */				
 			downloadFile: function (event) {
 				var item = this.getItem(event);
 				if(typeof item.asset.file !== 'string') return;
@@ -187,7 +189,9 @@ define([
 				window.location.href = item.asset.file + '&download';
 			},
 			
-			// Afficher un fichier
+			/**
+			 * Afficher un fichier
+			 */				
 			displayFile: function (event) {
 				var item = this.getItem(event);
 				if(typeof item.asset.file !== 'string') return;
@@ -195,7 +199,9 @@ define([
 				$.slimbox(item.asset.file, '', {overlayOpacity: 0.3});
             },
 			
-			// Retourne l'item sélectionné
+			/**
+			 * Retourne l'item sélectionné
+			 */				
 			getItem: function (event) {
 				var el = event.currentTarget || event.srcElement;
 				var id = el.id.split('.')[0];
@@ -208,11 +214,48 @@ define([
 				};
 			},
 			
-			// Met à jour le champ
+			/**
+			 * Met à jour le champ
+			 */				
 			updateField: function () {
 				this.setCurrentValue(this.assets && this.assets.length ? JSON.stringify(this.assets) : null);
 				this.render();
-			}
+			},
+			
+			/**
+			 * Sauvegarde une variable dans le cookie 
+			 */		 
+			setCookie: function(name, value, expires, path, domain, secure) {
+				var curCookie=name + "=" + escape(value) +
+						((expires) ? "; expires=" + expires.toGMTString() : "") +
+						((path) ? "; path=" + path : "") +
+						((domain) ? "; domain=" + domain : "") +
+						((secure) ? "; secure" : "");
+
+				document.cookie= curCookie;	
+			},
+
+			/**
+			 * Retourne la valeur d'un variale stocké dans le cookie
+			 */	 
+			getCookie: function(name) {
+				var dc=document.cookie;
+				var prefix = name + "=";
+				var begin=dc.indexOf("; "+ prefix);
+
+				if(begin===-1) {
+					begin=dc.indexOf(prefix);   
+					if(begin!==0) { return null; }
+				} else {
+					begin+=2;   
+				}
+
+				var end=document.cookie.indexOf(";", begin);
+				if(end===-1) { end=dc.length; }
+				var value=unescape(dc.substring(begin + prefix.length, end));
+
+				return value;
+			}			
 		});
 
 		return AssetSelectionView;
