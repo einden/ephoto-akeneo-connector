@@ -1,0 +1,8 @@
+.EphotoField-thumb {
+	width: 200px;
+	flex-basis: auto;
+}
+
+.EphotoField-image {
+	border: 1px solid #ccc;	
+}

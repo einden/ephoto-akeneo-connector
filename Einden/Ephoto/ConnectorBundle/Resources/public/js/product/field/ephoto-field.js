@@ -11,7 +11,7 @@ define([
 
 		var AssetSelectionView = Field.extend({
 
-			// ID du bundle Akeneo
+			// Akeneo bundle ID
 			CLIENT : 'D61e2620',
 			
 			// Instance ePhoto API
@@ -20,13 +20,13 @@ define([
 			// Configuration
 			config: null,
 
-			// Les actifs sélectionnés
+			// Selected Assets
 			assets: null,
 
-			// Prépare le template
+			// Prepares the template
 			fieldTemplate: _.template(fieldTemplate),
 
-			// Déclaration des événements
+			// Declaration of events
 			events: {
 				'click .display-file': 'displayFile',
 				'click .add-file': 'selectFile',
@@ -35,40 +35,36 @@ define([
 			},
 
 			/**
-			 * Initialisation
+			 * Initialization
 			 *
-			 * @param {??} Attibute			 
-			 */				
+			 * @param
+			 */
 			initialize: function (attribute) {
 				AssetSelectionView.__super__.initialize.apply(this, arguments);
-				
-				if(null !== this.config) {
-					console.log('double initialisation ??');
-				}
 
 				$.getJSON(
 					Routing.generate('einden_ephoto_get_config'),
-					function(result) {
-						this.config = result;
-
-						var configchecked = (
-							typeof this.config === 'object' &&
-							typeof this.config.baseurl === 'string' &&
-							this.config.baseurl.length
+					function(config) {
+						var check = (
+							typeof config === 'object' &&
+							typeof config.baseurl === 'string' &&
+							config.baseurl.length
 						);
 
-						if(!configchecked) {
-							alert('An error has occurred !');
+						if(!check) {
+							alert(_.__('ephoto.field.an_error_has_occurred'));
 							return;
 						}
+						
+						this.config = config;
 
-						// Chargement de l'API
+						// Load the API
 						if(typeof ePhoto === 'undefined') {
 							$.getScript(
 								this.config.baseurl + 'api/apiJS.js',
 								function( data, textStatus, jqxhr ) {
 									if(jqxhr.status !== 200 || typeof ePhoto === 'undefined') {
-										alert('The ePhoto server is unavailable !');
+										alert(_.__('ephoto.field.ephoto_server_is_unavailable'));
 										return;	
 									}
 
@@ -87,7 +83,7 @@ define([
 			},
 
 			/**
-			 * Initialisation de l'API ePhoto
+			 * Initializing the ePhoto API
 			 */	
 			connect: function() {
 				this.api=new ePhoto({
@@ -109,43 +105,43 @@ define([
 			},
 
 			/**
-			 *
+			 * callback when connected
 			 */	
 			isConnected: function() {
 				this.setCookie('ephoto.akeneo.connector.authid', this.api.getAuthID());
 			},
 
 			/**
-			 * Rendu du champ
+			 * Rendering of the field
 			 *
-			 * @param {object} Le contexte		 
-			 */				
+			 * @param {object} Context
+			 */
 			renderInput: function (context) {
-				// Charge les actifs au premier chargement
+				// Loads assets
 				if(null === this.assets) {
 					this.assets = context.value.data ? JSON.parse(context.value.data) : [];
 				}
 				
-				// Complète les valeurs
+				// Complete values
 				var inc, assets = this.assets.slice();
 				
 				for(inc in assets) {
 					assets[inc].id = this.attribute.id + '-' + inc;
 				}
 
-				// Retourne le template formaté
-                return this.fieldTemplate({
+				// Return the formatted template
+				return this.fieldTemplate({
 					id : this.attribute.id,
 					assets : assets
-                });
-            },
+				});
+			},
 
 			/**
-			 * Sélectionner un fichier
-			 */			
+			 * Select File
+			 */
 			selectFile: function () {
 				if(!this.api || !this.api.isConnected()) {
-					alert('The ePhoto server is unavailable !');
+					alert(_.__('ephoto.field.ephoto_server_is_unavailable'));
 					return;
 				}
 				
@@ -153,23 +149,23 @@ define([
 			},
 			
 			/**
-			 * Insert le fichier
+			 * Insert the file
 			 *
-			 * @param {string} le lien vers l'image
-			 * @param {xml} les métadonnées DublinCore XML
-			 */				
+			 * @param {string} the link to the image
+			 * @param {xml} DublinCore XML metadata
+			 */
 			insertFile: function(file, dcore) {
 				if(file === 'failure') {
-					alert('Une erreur a été rencontrée !');
-					return;
-				}
-				
-				if(file === 'fileDoesNotExist' || file === 'no authentication') {
-					alert('Aucun fichier sélectionné !');
+					alert(_.__('ephoto.field.an_error_has_occurred'));
 					return;
 				}
 
-				// Extraction des métadonnées du XML DublinCore
+				if(file === 'fileDoesNotExist' || file === 'no authentication') {
+					alert(_.__('ephoto.field.no_files_selected'));
+					return;
+				}
+
+				// Extract DublinCore XML metadata
 				var name = dcore.getElementsByTagName('dc:title')[0].childNodes[0].nodeValue;
 				
 				var thumbnail = dcore.getElementsByTagName('dc:source')[0].childNodes[0].nodeValue;
@@ -181,10 +177,10 @@ define([
 			},
 			
 			/**
-			 * Retirer un fichier
+			 * Remove a file
 			 *
 			 * @param {event}
-			 */				
+			 */
 			removeFile: function (event) {
 				var item = this.getItem(event);
 
@@ -193,10 +189,10 @@ define([
 			},
 
 			/**
-			 * Télécharger un fichier
+			 * Download a file
 			 *
-			 * @param {event}			 
-			 */				
+			 * @param {event}
+			 */
 			downloadFile: function (event) {
 				var item = this.getItem(event);
 				if(typeof item.asset.file !== 'string') return;
@@ -205,22 +201,22 @@ define([
 			},
 			
 			/**
-			 * Afficher un fichier
+			 * Display a file
 			 *
-			 * @param {event}			 
-			 */				
+			 * @param {event}
+			 */
 			displayFile: function (event) {
 				var item = this.getItem(event);
 				if(typeof item.asset.file !== 'string') return;
 				
 				$.slimbox(item.asset.file, '', {overlayOpacity: 0.3});
-            },
+			},
 			
 			/**
-			 * Retourne l'item sélectionné
+			 * Return the selected item
 			 *
 			 * @param {event}
-			 */				
+			 */
 			getItem: function (event) {
 				var el = event.currentTarget || event.srcElement;
 				var id = el.id.split('.')[0];
@@ -234,16 +230,16 @@ define([
 			},
 			
 			/**
-			 * Met à jour le champ
-			 */				
+			 * Updates field
+			 */
 			updateField: function () {
 				this.setCurrentValue(this.assets && this.assets.length ? JSON.stringify(this.assets) : null);
 				this.render();
 			},
 			
 			/**
-			 * Sauvegarde une variable dans le cookie 
-			 */		 
+			 * Saving a variable in the cookie
+			 */
 			setCookie: function(name, value, expires, path, domain, secure) {
 				var curCookie=name + "=" + escape(value) +
 						((expires) ? "; expires=" + expires.toGMTString() : "") +
@@ -255,18 +251,18 @@ define([
 			},
 
 			/**
-			 * Retourne la valeur d'un variale stocké dans le cookie
-			 */	 
+			 * Return the value stored in the cookie
+			 */
 			getCookie: function(name) {
 				var dc=document.cookie;
 				var prefix = name + "=";
 				var begin=dc.indexOf("; "+ prefix);
 
 				if(begin===-1) {
-					begin=dc.indexOf(prefix);   
+					begin=dc.indexOf(prefix);
 					if(begin!==0) { return null; }
 				} else {
-					begin+=2;   
+					begin+=2;
 				}
 
 				var end=document.cookie.indexOf(";", begin);
@@ -274,7 +270,7 @@ define([
 				var value=unescape(dc.substring(begin + prefix.length, end));
 
 				return value;
-			}			
+			}
 		});
 
 		return AssetSelectionView;

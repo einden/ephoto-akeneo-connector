@@ -1,3 +1,4 @@
 css:
     eindenephotoconnector:
         - bundles/eindenephotoconnector/css/configuration.css
+        - bundles/eindenephotoconnector/css/ephoto-field.css

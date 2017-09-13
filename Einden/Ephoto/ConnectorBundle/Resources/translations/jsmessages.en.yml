@@ -4,6 +4,9 @@ ephoto:
     view_file: View file
     download_file: Download file
     remove_file: Remove file
+    no_files_selected: No files selected
+    an_error_has_occurred: An error has occurred
+    ephoto_server_is_unavailable: ePhoto server is unavailable
   configuration:
     base_url:
       label: URL du serveur
