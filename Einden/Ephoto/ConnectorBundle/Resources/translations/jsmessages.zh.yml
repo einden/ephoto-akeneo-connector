@@ -10,8 +10,8 @@ ephoto:
   configuration:
     base_url:
       label: URL du serveur
-      placeholder : https://ephoto.entreprise.fr/
+      placeholder : https://ephoto.mycompagny.cn/
     tab: ePhoto
     copyright:
       label: © 2017 Einden. Tous droits réservés.
-      url: https://www.ephoto.fr
+      url: https://www.ephoto-soft.cn
