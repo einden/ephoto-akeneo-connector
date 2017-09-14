@@ -8,12 +8,12 @@ More information are available at our [website](https://ephoto.fr/).
 
 ## Requirements
 
-| Ephoto Connector Bundle  | Akeneo PIM Community Edition |
-|:--------------------:|:----------------------------:|
-| v1.0.*               | v1.7.*                       |
+| Ephoto Connector Bundle | Ephoto            | Akeneo PIM Community Edition |
+|:--------------------:|:--------------------:|:----------------------------:|
+| v1.0                 | v3.10.* and more     | v1.7.*                       |
 
 ## Installation
-You can install this bundle with composer (see requirements section):
+For example, if you have ePhoto 3.10, you can install this bundle with composer (see requirements section):
 ```bash
     php /path/to/your/composer.phar require ephoto/akeneo-connector:~1.0
 ```
