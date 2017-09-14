@@ -1,17 +1,17 @@
 ephoto:
   field:
-    select_file: Sélectionner un fichier
-    view_file: Voir le fichier
-    download_file: Télécharger le fichier
-    remove_file: Retirer le fichier
-    no_files_selected: Aucun fichier sélectionné
-    an_error_has_occurred: Une erreur a été rencontré
-    ephoto_server_is_unavailable: Le serveur ePhoto est indisponible
+    select_file: 选择文件
+    view_file: 查看文件
+    download_file: 下载文件
+    remove_file: 删除文件
+    no_files_selected: 没有选择文件
+    an_error_has_occurred: 出现错误
+    ephoto_server_is_unavailable: ePhoto系统地址有误
   configuration:
     base_url:
-      label: URL du serveur
-      placeholder : https://ephoto.mycompagny.cn/
+      label: ePhoto服务器底座
+      placeholder : https://ephoto.xxxx.cn
     tab: ePhoto
     copyright:
-      label: © 2017 Einden. Tous droits réservés.
+      label: © 2017 Einden. 版权所有
       url: https://www.ephoto-soft.cn
