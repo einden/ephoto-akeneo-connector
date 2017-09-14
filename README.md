@@ -10,7 +10,7 @@ More information are available at our [website](https://ephoto.fr/).
 
 | Ephoto Connector Bundle | Ephoto            | Akeneo PIM Community Edition |
 |:--------------------:|:--------------------:|:----------------------------:|
-| v1.0                 | v3.10.* and more     | v1.7.*                       |
+| v1.0.*               | v3.10.* and more     | v1.7.*                       |
 
 ## Installation
 For example, if you have ePhoto 3.10, you can install this bundle with composer (see requirements section):
