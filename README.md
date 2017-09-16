@@ -2,7 +2,10 @@
 # ePhoto - Akeneo Connector
 
 ## Description
-After installing the connector, you will be able to directly access assets from the ePhoto DAM.
+After installing the connector, you can import the assets of your choice from ePhoto DAM.
+
+Source code available on [Github](https://github.com/einden/ephoto-akeneo-connector.git).
+Install the bundle with [composer](https://packagist.org/packages/ephoto/akeneo-connector).
 
 More information are available at our [website](https://ephoto.fr/). 
 
