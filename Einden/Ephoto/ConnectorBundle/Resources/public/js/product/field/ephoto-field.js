@@ -168,7 +168,7 @@ define([
 			 * @param {xml} DublinCore XML metadata
 			 */
 			insertFile: function(file, dcore) {
-				var i, metadata, result = {};
+				var i, value, result = {};
 				
 				// Vérification du fichier
 				if(file === 'failure') {
@@ -189,23 +189,25 @@ define([
 
 				// Extract des métadonnées de la norme DublinCore
 				// Les métadonnées obligatoires
-				metadata = dcore.getElementsByTagName('dc:title');
-				if(!metadata.length) { return; }
+				value = dcore.getElementsByTagName('dc:title');
+				if(!value.length) { return; }
 				
-				result.name = metadata[0].childNodes[0].nodeValue;
+				result.name = value[0].childNodes[0].nodeValue;
 				
-				metadata = dcore.getElementsByTagName('dc:source');
-				if(!metadata.length) { return; }
+				value = dcore.getElementsByTagName('dc:source');
+				if(!value.length) { return; }
 				
-				metadata = metadata[0].childNodes[0].nodeValue;
-				result.thumbnail = metadata.replace('media/', 'small/') + '.JPG';
+				value = value[0].childNodes[0].nodeValue;
+				result.thumbnail = value.replace('media/', 'small/') + '.JPG';
 
 				// Les métadonnées facultatives
 				for(i=0; i<this.metadatas.length; i++) {
-					metadata = dcore.getElementsByTagName('dc:' + this.metadatas[i]);
+					console.log(this.metadatas[i]);
+					value = dcore.getElementsByTagName('dc:' + this.metadatas[i]);
+					console.log(value);
 					
-					if(metadata.length) {
-						result[ this.metadatas[i].replace('.', '_') ] = metadata[0].childNodes[0].nodeValue;
+					if(value.length) {
+						result[ this.metadatas[i].replace('.', '_') ] = value[0].childNodes[0].nodeValue;
 					}
 				}
 
