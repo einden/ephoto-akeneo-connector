@@ -18,10 +18,12 @@ define(
             },
             addFieldExtension: function (event) {
                 var product = this.getFormData();
-                event.promises.push($.Deferred().resolve().then(function () {
+               
+				event.promises.push($.Deferred().resolve().then(function () {
                     var field = event.field;
                     field.productAttributes = product.meta;
-                }.bind(this)).promise());
+                
+				}.bind(this)).promise());
 
                 return this;
             }

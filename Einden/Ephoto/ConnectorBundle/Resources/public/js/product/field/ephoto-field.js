@@ -33,6 +33,19 @@ define([
 				'click .remove-file': 'removeFile',
 				'click .download-file': 'downloadFile',
 			},
+			
+			// Les métadonnées de la norme DublinCore (hors title et source)
+			metadatas: [
+				'description.abstract',
+				'contributor',
+				'subject',
+				'creator',
+				'publisher',
+				'title.alternative',
+				'coverage',
+				'relation',
+				'rights'
+			],
 
 			/**
 			 * Initialization
@@ -155,6 +168,9 @@ define([
 			 * @param {xml} DublinCore XML metadata
 			 */
 			insertFile: function(file, dcore) {
+				var i, metadata, result = {};
+				
+				// Vérification du fichier
 				if(file === 'failure') {
 					alert(_.__('ephoto.field.an_error_has_occurred'));
 					return;
@@ -164,14 +180,37 @@ define([
 					alert(_.__('ephoto.field.no_files_selected'));
 					return;
 				}
-
-				// Extract DublinCore XML metadata
-				var name = dcore.getElementsByTagName('dc:title')[0].childNodes[0].nodeValue;
 				
-				var thumbnail = dcore.getElementsByTagName('dc:source')[0].childNodes[0].nodeValue;
-				thumbnail = thumbnail.replace('media/', 'small/') + '.JPG';
+				// Lien vers le fichier
+				result.file = file;
+				
+				// Lien vers le fichier en forcant le téléchargement
+				result.downloadfile = file + '&download';
 
-				this.assets.push({file : file, thumbnail : thumbnail, name : name});
+				// Extract des métadonnées de la norme DublinCore
+				// Les métadonnées obligatoires
+				metadata = dcore.getElementsByTagName('dc:title');
+				if(!metadata.length) { return; }
+				
+				result.name = metadata[0].childNodes[0].nodeValue;
+				
+				metadata = dcore.getElementsByTagName('dc:source');
+				if(!metadata.length) { return; }
+				
+				metadata = metadata[0].childNodes[0].nodeValue;
+				result.thumbnail = metadata.replace('media/', 'small/') + '.JPG';
+
+				// Les métadonnées facultatives
+				for(i=0; i<this.metadatas.length; i++) {
+					metadata = dcore.getElementsByTagName('dc:' + this.metadatas[i]);
+					
+					if(metadata.length) {
+						result[ this.metadatas[i].replace('.', '_') ] = metadata[0].childNodes[0].nodeValue;
+					}
+				}
+
+				// Ajout au JSON
+				this.assets.push(result);
 				
 				this.updateField();
 			},
