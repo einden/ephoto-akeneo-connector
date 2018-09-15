@@ -27,6 +27,18 @@ class EphotoValueConverter extends AbstractValueConverter implements ValueConver
 	 */
 	public function convert($attributeCode, $data)
 	{
-		return [];
+            $convertedItem = [];
+		
+            foreach ($data as $value) {
+                $flatName = $this->columnsResolver->resolveFlatAttributeName(
+                        $attributeCode,
+                        $value['locale'],
+                        $value['scope']
+                );
+
+                $convertedItem[$flatName] = $value['data'];
+            }
+		
+            return $convertedItem;		
 	}
 }

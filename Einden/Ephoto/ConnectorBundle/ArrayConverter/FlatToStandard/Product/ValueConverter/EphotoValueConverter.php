@@ -33,7 +33,7 @@ class EphotoValueConverter extends AbstractValueConverter
 						[
 								'locale' => $attributeFieldInfo['locale_code'],
 								'scope'  => $attributeFieldInfo['scope_code'],
-								'data'   => '',
+								'data'   => trim((string)$value),
 						],
 				],
 		];
