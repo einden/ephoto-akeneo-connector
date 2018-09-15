@@ -28,7 +28,7 @@ class EphotoValueConverter extends AbstractValueConverter implements ValueConver
 	public function convert($attributeCode, $data)
 	{
             $convertedItem = [];
-		
+
             foreach ($data as $value) {
                 $flatName = $this->columnsResolver->resolveFlatAttributeName(
                         $attributeCode,
@@ -36,7 +36,7 @@ class EphotoValueConverter extends AbstractValueConverter implements ValueConver
                         $value['scope']
                 );
 
-                $convertedItem[$flatName] = $value['data'];
+				$convertedItem[$flatName] = $value['data'];
             }
 		
             return $convertedItem;		

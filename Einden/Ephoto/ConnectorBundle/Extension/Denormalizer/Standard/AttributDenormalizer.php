@@ -11,7 +11,6 @@ class AttributDenormalizer extends AbstractValueDenormalizer
 {
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-		return null;
-        //return '' === $data ? null : $data;
+        return '' === $data ? null : $data;
     }
 }

@@ -202,10 +202,8 @@ define([
 
 				// Les métadonnées facultatives
 				for(i=0; i<this.metadatas.length; i++) {
-					console.log(this.metadatas[i]);
 					value = dcore.getElementsByTagName('dc:' + this.metadatas[i]);
-					console.log(value);
-					
+
 					if(value.length) {
 						result[ this.metadatas[i].replace('.', '_') ] = value[0].childNodes[0].nodeValue;
 					}
