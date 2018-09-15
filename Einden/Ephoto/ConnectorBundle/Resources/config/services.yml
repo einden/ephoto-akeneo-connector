@@ -3,3 +3,10 @@ services:
         class: Einden\Ephoto\ConnectorBundle\Enrich\Provider\Field\EphotoFieldProvider
         tags:
             - { name: pim_enrich.provider.field, priority: 90 }
+
+    einden.ephoto.serializer.denormalizer.attribute:
+        class: Einden\Ephoto\ConnectorBundle\Extension\Denormalizer\Standard\AttributDenormalizer
+        arguments:
+            - ['einden_catalog_ephoto']
+        tags:
+            - { name: pim_serializer.normalizer, priority: 90 }
