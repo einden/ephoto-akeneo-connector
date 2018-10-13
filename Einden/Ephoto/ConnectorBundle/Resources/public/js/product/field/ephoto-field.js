@@ -131,9 +131,7 @@ define([
 			 */
 			renderInput: function (context) {
 				// Loads assets
-				if(null === this.assets) {
-					this.assets = context.value.data ? JSON.parse(context.value.data) : [];
-				}
+				this.assets = context.value.data ? JSON.parse(context.value.data) : [];
 				
 				// Complete values
 				var inc, assets = this.assets.slice();
