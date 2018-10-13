@@ -189,9 +189,15 @@ define([
 				// Les métadonnées obligatoires
 				value = dcore.getElementsByTagName('dc:title');
 				if(!value.length) { return; }
+<<<<<<< Updated upstream
 				
 				result.name = value[0].childNodes[0].nodeValue;
 				
+=======
+				
+				result.name = value[0].childNodes[0].nodeValue;
+				
+>>>>>>> Stashed changes
 				value = dcore.getElementsByTagName('dc:source');
 				if(!value.length) { return; }
 				
