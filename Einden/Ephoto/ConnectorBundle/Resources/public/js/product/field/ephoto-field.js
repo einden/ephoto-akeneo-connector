@@ -179,6 +179,13 @@ define([
 					return;
 				}
 				
+				// Suppression de l'extension dans le lien
+				var ext = file.substr(file.lastIndexOf('.') + 1);
+				
+				if(ext.length === 3) {
+					file = file.substr(0, file.lastIndexOf('.') - 1);
+				}
+				
 				// Lien vers le fichier
 				result.file = file;
 				
@@ -191,6 +198,13 @@ define([
 				if(!value.length) { return; }
 
 				result.name = value[0].childNodes[0].nodeValue;
+
+				value = dcore.getElementsByTagName('dc:format');
+				
+				if(value.length) {
+					result.format = value[0].childNodes[0].nodeValue;
+					result.name += '.' + result.format;
+				}
 
 				value = dcore.getElementsByTagName('dc:source');
 				if(!value.length) { return; }
