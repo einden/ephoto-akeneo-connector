@@ -192,7 +192,7 @@ define([
 				// Lien vers le fichier en forcant le téléchargement
 				result.downloadfile = file + '&download';
 
-				// Extract des métadonnées de la norme DublinCore
+				// Extraction des métadonnées de la norme DublinCore
 				// Les métadonnées obligatoires
 				value = dcore.getElementsByTagName('dc:title');
 				if(!value.length) { return; }
@@ -203,7 +203,12 @@ define([
 				
 				if(value.length) {
 					result.format = value[0].childNodes[0].nodeValue;
-					result.name += '.' + result.format;
+					
+					if(result.format === 'JPEG') {
+						result.format = 'JPG';
+					}
+					
+					result.name += '.' + result.format.toLowerCase();
 				}
 
 				value = dcore.getElementsByTagName('dc:source');
