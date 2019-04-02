@@ -1,0 +1,11 @@
+.EphotoDatagrid-thumbnail {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+	width:60px;
+}
+
+.EphotoDatagrid-thumbnail img {
+    max-height: 40px;
+    max-width: 60px;
+}

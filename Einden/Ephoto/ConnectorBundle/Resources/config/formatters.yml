@@ -1,0 +1,7 @@
+services:
+    einden.ephoto.datagrid.extension.formatter.property.product_value.einden_catalog_ephoto:
+        class: Einden\Ephoto\ConnectorBundle\DataGrid\Formatter\Property\ProductValue\EphotoProperty
+        arguments:
+            - '@twig'
+        tags:
+            - { name: oro_datagrid.extension.formatter.property, type: product_value_ephoto }

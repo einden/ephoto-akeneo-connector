@@ -1,4 +1,5 @@
 css:
     eindenephotoconnector:
-        - bundles/eindenephotoconnector/css/configuration.css
+        - bundles/eindenephotoconnector/css/ephoto-configuration.css
         - bundles/eindenephotoconnector/css/ephoto-field.css
+        - bundles/eindenephotoconnector/css/ephoto-datagrid.css
