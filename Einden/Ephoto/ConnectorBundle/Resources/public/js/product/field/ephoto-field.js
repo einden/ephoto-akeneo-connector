@@ -183,7 +183,7 @@ define([
 				var ext = file.substr(file.lastIndexOf('.') + 1);
 				
 				if(ext.length === 3) {
-					file = file.substr(0, file.lastIndexOf('.') - 1);
+					file = file.substr(0, file.lastIndexOf('.'));
 				}
 				
 				// Lien vers le fichier
