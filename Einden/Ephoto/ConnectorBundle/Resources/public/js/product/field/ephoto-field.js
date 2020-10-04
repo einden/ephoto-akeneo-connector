@@ -215,7 +215,7 @@ define([
 				if(!value.length) { return; }
 				
 				value = value[0].childNodes[0].nodeValue;
-				result.thumbnail = value.replace('media/', 'small/') + '.JPG';
+				result.thumbnail = value.replace('media/', 'small/').replace('file/', 'small/') + '.JPG';
 
 				// Les métadonnées facultatives
 				for(i=0; i<this.metadatas.length; i++) {
